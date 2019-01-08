@@ -10,6 +10,8 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
@@ -22,10 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.xml.crypto.Data;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.StringReader;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -39,6 +38,9 @@ public class Controller implements Initializable{
 
     @FXML
     public AnchorPane field = new AnchorPane();
+
+    @FXML
+    public ImageView fieldImg = new ImageView();
 
     @FXML
     public SplitPane pane = new SplitPane();
@@ -83,6 +85,7 @@ public class Controller implements Initializable{
     private Group initialRobot;
     private Group lastRobot;
 
+
     Rectangle initialRobotSprite;
     Rectangle lastRobotSprite;
 
@@ -122,6 +125,15 @@ public class Controller implements Initializable{
         field.getChildren().add(trajectory);
 
         wayPointUI.setVisible(false);
+
+        try {
+            Image fieldDrawings = new Image(new FileInputStream("src/Media/field.jpg"));
+            fieldImg.setImage(fieldDrawings);
+            fieldImg.setFitHeight(fieldHeight * fieldMultiplicator);
+            fieldImg.setFitWidth(fieldWidth * fieldMultiplicator);
+        } catch (Exception e ){
+            System.out.println("Field Image is not valid");
+        }
 
 
 
